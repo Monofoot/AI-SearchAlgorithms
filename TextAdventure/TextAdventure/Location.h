@@ -24,11 +24,6 @@ public:
 		return desc;
 	}
 	void setExitCosts(int north, int east, int south, int west);
-	void getExitCosts()
-	{
-		std::cout << "Exit costs are: " << exitCosts[0] << std::endl;
-		std::cout << "Exit costs are: " << exitCosts[1] << std::endl;
-		std::cout << "Exit costs are: " << exitCosts[2] << std::endl;
-		std::cout << "Exit costs are: " << exitCosts[3] << std::endl;
-	}
+	void getExitCosts();
+	void navigation(std::string in);
 };
