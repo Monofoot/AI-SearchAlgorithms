@@ -5,6 +5,7 @@
 
 Character::Character(std::string charName)
 {
+	
 	name = charName;
 }
 

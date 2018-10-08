@@ -9,6 +9,11 @@ Location::Location(std::string description)
 
 }
 
+std::string Location::getDesc()
+{
+	return desc;
+}
+
 void Location::setExits(Location *n, Location *e, Location *s, Location *w)
 {
 	north = n;
@@ -39,31 +44,4 @@ void Location::getExitCosts()
 	std::cout << "Exit costs are: " << exitCosts[1] << std::endl;
 	std::cout << "Exit costs are: " << exitCosts[2] << std::endl;
 	std::cout << "Exit costs are: " << exitCosts[3] << std::endl;
-}
-
-void Location::navigation(std::string in)
-{
-	std::string direction = in;
-
-	if (direction == "n")
-	{
-		// character.location = north location
-		std::cout << "Your new location is: n";
-	}
-	else if (direction == "e")
-	{
-		std::cout << "Your new location is: e";
-	}
-	else if (direction == "s")
-	{
-		std::cout << "Your new location is: s";
-	}
-	else if (direction == "w")
-	{
-		std::cout << "Your new location is: w";
-	}
-	else
-	{
-		std::cout << "You need to enter a valid direction. Enter either n, e, s or w in lower-case.";
-	}
 }

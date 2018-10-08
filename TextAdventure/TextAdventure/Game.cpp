@@ -7,9 +7,7 @@
 
 void Game::mainRoutine()
 {
-	// Set the locations in a vector.
-	std::vector<Location> locations;
-
+	// Declare each location.
 	Location library("Library");
 	Location trollRoom("Troll's Room");
 	Location mysteriousRoom("Mysterious Room");
@@ -26,6 +24,13 @@ void Game::mainRoutine()
 	Location doom("Doom.");
 	Location empty("Empty.");
 
+	currentLocation = &entrance;
+
+	// Each location need to be instantiated with four parameters.
+	// First we set exits, which requires pointers to the north,
+	// east, south and west of each room.
+	// Secondly we need to set the corresponding exit costs, where
+	// int is (north, east, south, west).
 	entrance.setExits(&dampCavern, &empty, &empty, &empty);
 	entrance.setExitCosts(2, 0, 0, 0);
 	iceBox.setExits(&kitchen, &empty, &empty, &empty);
@@ -67,14 +72,41 @@ void Game::mainRoutine()
 	bool gameRunning = true;
 	while (gameRunning == true)
 	{
-		entrance.getExits();
+		currentLocation->getExits();
 		std::cout << "Where would you like to turn?" << std::endl;
 
 		std::string input;
 		std::cin >> input;
 
-		// This needs to not be entrance. Need a way to change this to player.location.
-		entrance.navigation(input);
+		// Need a way to change this to player.location. maybe.
+		// WORK ON NAVIGATION!!!
+		navigation(input);
 	}
+}
 
+void Game::navigation(std::string in)
+{
+	std::string direction = in;
+
+	if (direction == "n")
+	{
+		std::cout << "Your new location is: n" << std::endl << std::endl;
+		std::cout << currentLocation->getDesc();
+	}
+	else if (direction == "e")
+	{
+		std::cout << "Your new location is: e" << std::endl << std::endl;
+	}
+	else if (direction == "s")
+	{
+		std::cout << "Your new location is: s" << std::endl << std::endl;
+	}
+	else if (direction == "w")
+	{
+		std::cout << "Your new location is: w" << std::endl << std::endl;
+	}
+	else
+	{
+		std::cout << "You need to enter a valid direction. Enter either n, e, s or w in lower-case." << std::endl << std::endl;
+	}
 }

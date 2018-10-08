@@ -17,13 +17,8 @@ public:
 	Location();
 	Location(std::string description);
 	void setExits(Location *n, Location *e, Location *s, Location *w);
-	//For debugging currently - remove after
 	void getExits();
-	std::string getDesc()
-	{
-		return desc;
-	}
+	std::string getDesc();
 	void setExitCosts(int north, int east, int south, int west);
 	void getExitCosts();
-	void navigation(std::string in);
 };
