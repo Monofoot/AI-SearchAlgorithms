@@ -1,17 +1,13 @@
 #include"Location.h"
 #include<string>
+#include<iostream>
 
 Location::Location() {}
 
-Location::Location(std::string description)
+Location::Location(std::string n)
 {
-	desc = description;
+	name = n;
 
-}
-
-std::string Location::getDesc()
-{
-	return desc;
 }
 
 void Location::setExits(Location *n, Location *e, Location *s, Location *w)
@@ -22,26 +18,70 @@ void Location::setExits(Location *n, Location *e, Location *s, Location *w)
 	west = w;
 }
 
+void Location::setCost(int north, int south, int east, int west)
+{
+	costNorth = north;
+	costEast = east;
+	costSouth = south;
+	costWest = west;
+}
+
+Location* Location::getDirection(char heading)
+{
+	if (heading == 'n')
+	{
+		return north;
+	}
+	else if (heading == 'e')
+	{
+		return east;
+	}
+	else if (heading == 's')
+	{
+		return south;
+	}
+	else if (heading == 'w')
+	{
+		return west;
+	}
+	else
+	{
+		std::cout << "Incorrect direction. Please only type n, e, s or w." << std::endl;
+	}
+}
+
+int Location::getCost(char heading)
+{
+	if (heading == 'n')
+	{
+		return costNorth;
+	}
+	else if (heading == 'e')
+	{
+		return costEast;
+	}
+	else if (heading == 's')
+	{
+		return costSouth;
+	}
+	else if (heading == 'w')
+	{
+		return costWest;
+	}
+}
+
 void Location::getExits()
 {
-	std::cout << "To the North of you is: " << north->desc <<std::endl;
-	std::cout << "To the East of you is: " << east->desc <<std::endl;
-	std::cout << "To the South of you is: " << south->desc <<std::endl;
-	std::cout << "To the West of you is: " << west->desc <<std::endl;
+	std::cout << "To the North of you is: " << north->name << std::endl;
+	std::cout << "To the East of you is: " << east->name << std::endl;
+	std::cout << "To the South of you is: " << south->name << std::endl;
+	std::cout << "To the West of you is: " << west->name << std::endl;
 }
 
-void Location::setExitCosts(int north, int south, int east, int west)
+std::string Location::getCurrentLocation()
 {
-	exitCosts[0] = north;
-	exitCosts[1] = south;
-	exitCosts[2] = east;
-	exitCosts[3] = west;
+	return name;
 }
 
-void Location::getExitCosts()
-{
-	std::cout << "Exit costs are: " << exitCosts[0] << std::endl;
-	std::cout << "Exit costs are: " << exitCosts[1] << std::endl;
-	std::cout << "Exit costs are: " << exitCosts[2] << std::endl;
-	std::cout << "Exit costs are: " << exitCosts[3] << std::endl;
-}
+Location::~Location()
+{}

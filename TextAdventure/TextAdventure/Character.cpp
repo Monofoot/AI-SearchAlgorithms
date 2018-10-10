@@ -1,15 +1,17 @@
 #include"Character.h"
-#include"Location.h"
-#include<string>
-#include<iostream>
 
-Character::Character(std::string charName)
+Character::Character()
+{}
+
+void Character::setCurrentLocation(Location location)
 {
-	
-	name = charName;
+	currentLocation = location;
 }
 
-std::string Character::getName()
+Location Character::getCurrentLocation()
 {
-	return name;
+	return currentLocation;
 }
+
+Character::~Character()
+{}

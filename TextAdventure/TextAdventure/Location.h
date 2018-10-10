@@ -1,24 +1,24 @@
 #pragma once
-#include<iostream>
 #include<string>
-#include<vector>
 
 class Location
 {
 private:
-	std::string desc;
+	std::string name = " ";
 	Location *north;
 	Location *east;
 	Location *south;
 	Location *west;
-	int exitCosts[4];
+	int costNorth, costEast, costSouth, costWest;
 
 public:
 	Location();
-	Location(std::string description);
+	Location(std::string n);
 	void setExits(Location *n, Location *e, Location *s, Location *w);
+	void setCost(int, int, int, int);
+	Location* getDirection(char);
+	int getCost(char);
 	void getExits();
-	std::string getDesc();
-	void setExitCosts(int north, int east, int south, int west);
-	void getExitCosts();
+	std::string getCurrentLocation();
+	~Location();
 };

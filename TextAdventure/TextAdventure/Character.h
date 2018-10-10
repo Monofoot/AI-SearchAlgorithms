@@ -1,14 +1,14 @@
 #pragma once
-#include<string>
 #include"Location.h"
 
 class Character
 {
 private:
-	int fatigue = 100;
-	std::string name;
+	Location currentLocation;
 
 public:
-	Character(std::string charName);
-	std::string getName();
+	Character();
+	void setCurrentLocation(Location);
+	Location getCurrentLocation();
+	~Character();
 };
