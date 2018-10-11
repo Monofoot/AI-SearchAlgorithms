@@ -1,1 +1,4 @@
 # TextAdventure
+
+TO-DO:
+Algorithms
