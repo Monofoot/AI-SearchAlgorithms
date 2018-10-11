@@ -18,9 +18,9 @@ public:
 	Game();
 	void mapSetup();
 	void getCurrentLocation();
-	void moveCharacter();
-	void setDestination(Location x);
-	Location getDestination();
+	void playerInput();
+	void setGoal(Location x);
+	Location getGoal();
 	Location printCurrentLocation();
 	void setCurrentLocation(Location l);
 	int getCost();

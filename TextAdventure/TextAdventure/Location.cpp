@@ -4,12 +4,15 @@
 
 Location::Location() {}
 
+// Construct the location with a name.
 Location::Location(std::string n)
 {
 	name = n;
 
 }
 
+// Set north, east, south and west exits. These use pointers to instantiate locations
+// for each direction.
 void Location::setExits(Location *n, Location *e, Location *s, Location *w)
 {
 	north = n;
@@ -18,6 +21,7 @@ void Location::setExits(Location *n, Location *e, Location *s, Location *w)
 	west = w;
 }
 
+// Set the cost for each direction.
 void Location::setCost(int north, int south, int east, int west)
 {
 	costNorth = north;
@@ -26,6 +30,7 @@ void Location::setCost(int north, int south, int east, int west)
 	costWest = west;
 }
 
+// Input is heading - this function returns the heading the user specifies.
 Location* Location::getDirection(char heading)
 {
 	if (heading == 'n')
@@ -50,6 +55,7 @@ Location* Location::getDirection(char heading)
 	}
 }
 
+// Return the cost of each direction.
 int Location::getCost(char heading)
 {
 	if (heading == 'n')
@@ -70,6 +76,7 @@ int Location::getCost(char heading)
 	}
 }
 
+// Return the exits attached to the current location.
 void Location::getExits()
 {
 	std::cout << "To the North of you is: " << north->name << std::endl;
@@ -78,6 +85,7 @@ void Location::getExits()
 	std::cout << "To the West of you is: " << west->name << std::endl;
 }
 
+// Return the current location, stored in the name variable.
 std::string Location::getCurrentLocation()
 {
 	return name;
