@@ -8,7 +8,6 @@ Location::Location() {}
 Location::Location(std::string n)
 {
 	name = n;
-
 }
 
 // Set north, east, south and west exits. These use pointers to instantiate locations
