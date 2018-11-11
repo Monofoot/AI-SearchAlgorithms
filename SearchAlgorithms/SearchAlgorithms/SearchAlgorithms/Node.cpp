@@ -2,9 +2,14 @@
 // The Node constructor uses an initializer list to set a name. This must have a value.
 // When instantiating a new node on the graph, use "empty" to designate an empty
 // node.
-Node::Node(std::string Name)
-	: name(Name)
+// Also parse the four costs to the cost array.
+Node::Node(std::string Name, int costN, int costE, int costS, int costW):name(Name)
 {
+	costToLeave[0] = costN; // North.
+	costToLeave[1] = costE; // East.
+	costToLeave[2] = costS; // South.
+	costToLeave[3] = costW; // West.
+
 }
 
 // Set the north, south, east and west neighbours to the current node.
@@ -18,32 +23,34 @@ void Node::setNeighbours(Node* nextNorth, Node* nextEast, Node* nextSouth, Node*
 	neighbours.insert(neighbours.end(), { nextNorth, nextEast, nextSouth, nextWest });
 }
 
-// Set the cost to VISIT this node.
-void Node::setCostToVisit(int cost)
+void Node::getCostToLeave()
 {
-	costToVisit = cost;
-}
-
-void Node::getCostToVisit(Node* getCost)
-{
-	std::cout << "THE COST OF " << neighbours[0]->name << "IS: " << neighbours[0]->costToVisit << std::endl;
-	std::cout << "THE COST OF " << neighbours[1]->name << "IS: " << neighbours[1]->costToVisit << std::endl;
-	std::cout << "THE COST OF " << neighbours[2]->name << "IS: " << neighbours[2]->costToVisit << std::endl;
-	std::cout << "THE COST OF " << neighbours[3]->name << "IS: " << neighbours[3]->costToVisit << std::endl;
-}
-
-// Debugging
-void Node::testExists()
-{
-	std::cout << "My name is " << name;
+	// For loop cycling through the size of the vector.
+	// Uses the size function to determine how many neighbours
+	// are attached to this node.
+	for (int i = 0; i < neighbours.size(); i++)
+	{
+		std::cout << "The cost to get to " << neighbours[i]->name << " is: " << costToLeave[i] << std::endl;
+	}
 }
 
 void Node::getNeighbours()
 {
-	std::cout << neighbours[0]->name;
-	std::cout << neighbours[1]->name;
-	std::cout << neighbours[2]->name;
-	std::cout << neighbours[3]->name;
+	// For loop cycling through the size of the vector.
+	// Uses the size function to determine how many neighbours
+	// are attached to this node.
+	// This function is essentially the same as getCostToVisit
+	// but accesses a different member.
+	for (int i = 0; i < neighbours.size(); i++)
+	{
+		std::cout << "My neighbour is: " << neighbours[i]->name << std::endl;
+	}
+}
+
+// Simple getter - however it is important to pay attention to formatting here.
+void Node::getName()
+{
+	std::cout << std::endl << "Current location: " << name << std::endl;
 }
 
 // Destructor
