@@ -13,12 +13,13 @@ private:
 	// The cost to travel in a direction FROM this node.
 	// [North], [East], [South], [West]
 	int costToLeave[4];
-	// A vector contains pointers to all of the node's neighbours.
-	// An alternative to this would be to use an array of
-	// [0] [1] [2] [3] as we know how many adjacent links we'll be using.
-	// However, I want to keep this project scaleable and I'm not sure
-	// what the search algorithms might demand down the line.
-	std::vector<Node*> neighbours;
+	// Use an array of:
+	// [North], [East], [South], [West] as we know how many adjacent links we'll be using.
+	Node* neighbours[4];
+	// We must hold a boolean in each node for the visited status.
+	// This is to prevent algorithms hitting the node more than once
+	// and potentially endlessly looping.
+	bool visited;
 
 public:
 	// The constructor for a node will also set the name.
@@ -31,11 +32,21 @@ public:
 	Node(std::string Name, int costN, int costE, int costS, int costW);
 	// Set the neighbours of this node.
 	void setNeighbours(Node* nextNorth, Node* nextEast, Node* nextSouth, Node* nextWest);
+	// Setter for the visited boolean.
+	void setVisited(bool x);
+	
+	// Accessor Methods
 	// These three functions are used heavily in the Graph class.
 	// Using these three together we can neatly present our data structure.
 	void getCostToLeave();
 	void getNeighbours();
+	Node* getNorth();
+	Node* getEast();
+	Node* getSouth();
+	Node* getWest();
 	void getName();
+	bool getVisited();
 
+	// Destructor
 	~Node();
 };

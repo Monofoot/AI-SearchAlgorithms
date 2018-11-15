@@ -12,21 +12,21 @@ void Graph::map()
 	// to other nodes,
 	// [North], [East], [South], [West]
 	// Shop.setNeighbours(&North, &East, &South, &West);
-	Node Empty("Empty", 0, 0, 0, 0);
-	Node Doom("DOOM", 0, 0, 0, 0);
-	Node Entrance("Entrance", 2, 0, 0, 0);
-	Node IceBox("Ice Box", 10, 0, 0, 0);
-	Node GuardRoom("Guard Room", 2, 1, 0, 0);
+	Node Empty("Empty", NULL, NULL, NULL, NULL);
+	Node Doom("DOOM", NULL, NULL, NULL, NULL);
+	Node Entrance("Entrance", 2, NULL, NULL, NULL);
+	Node IceBox("Ice Box", 10, NULL, NULL, NULL);
+	Node GuardRoom("Guard Room", 2, 1, NULL, NULL);
 	Node DampCavern("Damp Cavern", 1, 2, 2, 1);
 	Node Kitchen("Kitchen", 1, 1, 2, 2);
-	Node Larder("Larder", 1, 0, 10, 1);
-	Node Barracks("Barracks", 0, 0, 2, 0);
-	Node WellRoom("Well Room", 0, 0, 1, 0);
+	Node Larder("Larder", 1, NULL, 10, 1);
+	Node Barracks("Barracks", NULL, NULL, 2, NULL);
+	Node WellRoom("Well Room", NULL, NULL, 1, NULL);
 	Node GreatHall("Great Hall", 2, 4, 1, 2);
-	Node BottleRoom("Bottle Room", 0, 0, 2, 2);
-	Node TrollsRoom("Troll's Room", 1, 3, 2, 0);
-	Node MysteriousRoom("Mysterious Room", 3, 0, 4, 3);
-	Node Library("Library", 0, 3, 1, 0);
+	Node BottleRoom("Bottle Room", NULL, NULL, 2, 2);
+	Node TrollsRoom("Troll's Room", 1, 3, 2, NULL);
+	Node MysteriousRoom("Mysterious Room", 3, NULL, 4, 3);
+	Node Library("Library", NULL, 3, 1, NULL);
 
 	// Store these nodes in a vector of nodes. This will help when displaying
 	// data. Right now it's a bit messy. I might ask around
@@ -51,6 +51,8 @@ void Graph::map()
 	TrollsRoom.setNeighbours(&Library, &MysteriousRoom, &GreatHall, &Empty);
 	MysteriousRoom.setNeighbours(&Library, &Empty, &GreatHall, &TrollsRoom);
 	Library.setNeighbours(&Empty, &MysteriousRoom, &TrollsRoom, &Empty);
+
+	BFS(&Entrance, &MysteriousRoom);
 }
 
 void Graph::addToVector(Node* node)
@@ -68,5 +70,91 @@ void Graph::printMap()
 	}
 }
 
+
+// Make sure we parse a node which is the starting point and a
+// node which is the end point.
+void Graph::BFS(Node* start, Node* end)
+{
+	// Mark all nodes as not visited.
+	for (int i = 0; i < size(Nodes); i++)
+	{
+		Nodes[i]->setVisited(false);
+	}
+
+	// Set current to start.
+	current = start;
+
+	// Make a new empty queue of Nodes
+	std::list<Node*> queue;
+
+	// Add the start node to the queue and set it as visited.
+	queue.push_back(current);
+	current->setVisited(true);
+
+	// While queue is not empty
+	while (!queue.empty())
+	{
+		// Dequeue the current vertex and pop it.
+		current = queue.front();
+		queue.pop_front();
+
+		// for each neighbour
+		for (int i = 0; i < 4; i++)
+		{
+			// If neighbour is not visited
+			if (current->getNorth()->getVisited() == false)
+			{
+				// Get north and add current to the queue
+				queue.push_back(current->getNorth());
+				current->getNorth()->setVisited(true);
+				std::cout << "My CURRENT location is: " << std::endl; current->getName();
+				std::cout << std::endl;
+				std::cout << "To the North is: ";
+				current->getNorth()->getName();
+				std::cout << std::endl;
+			}
+			if (current->getEast()->getVisited() == false)
+			{
+				// Get north and add current to the queue
+				queue.push_back(current->getEast());
+				current->getEast()->setVisited(true);
+				std::cout << "My CURRENT location is: " << std::endl; current->getName();
+				std::cout << std::endl;
+				std::cout << "To the East is: ";
+				current->getEast()->getName();
+				std::cout << std::endl;
+			}
+			if (current->getSouth()->getVisited() == false)
+			{
+				// Get north and add current to the queue
+				queue.push_back(current->getSouth());
+				current->getSouth()->setVisited(true);
+				std::cout << "My CURRENT location is: " << std::endl; current->getName();
+				std::cout << std::endl;
+				std::cout << "To the South is: ";
+				current->getSouth()->getName();
+				std::cout << std::endl;
+			}
+			if (current->getWest()->getVisited() == false)
+			{
+				// Get north and add current to the queue
+				queue.push_back(current->getWest());
+				current->getWest()->setVisited(true);
+				std::cout << "My CURRENT location is: " << std::endl; current->getName();
+				std::cout << std::endl;
+				std::cout << "To the West is: ";
+				current->getWest()->getName();
+				std::cout << std::endl;
+			}
+		}
+		if (current == end)
+		{
+			return;
+		}
+	}
+
+
+
+}
 
 Graph::~Graph(){}

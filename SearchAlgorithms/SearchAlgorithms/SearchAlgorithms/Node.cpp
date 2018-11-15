@@ -20,15 +20,38 @@ void Node::setNeighbours(Node* nextNorth, Node* nextEast, Node* nextSouth, Node*
 	// should be empty anyway - unless something has gone horribly wrong.
 	// Using an array may be a suitable alternative to this as we can keep it bound to
 	// four elements - north, east, south and west.
-	neighbours.insert(neighbours.end(), { nextNorth, nextEast, nextSouth, nextWest });
+	neighbours[0] = nextNorth;
+	neighbours[1] = nextEast;
+	neighbours[2] = nextSouth;
+	neighbours[3] = nextWest;
 }
+
+// Set whether or not this node has been visited. 
+// This is important for most of the algorithms to work as
+// we need to mark whether or not a node is visited to prevent
+// recursion.
+void Node::setVisited(bool x)
+{
+	if (x == true)
+	{
+		visited = true;
+	}
+	else
+	{
+		visited = false;
+	}
+}
+
+// Accessor Methods
 
 void Node::getCostToLeave()
 {
 	// For loop cycling through the size of the vector.
 	// Uses the size function to determine how many neighbours
 	// are attached to this node.
-	for (int i = 0; i < neighbours.size(); i++)
+	int n = sizeof(neighbours) / sizeof(neighbours[0]);
+
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << "The cost to get to " << neighbours[i]->name << " is: " << costToLeave[i] << std::endl;
 	}
@@ -41,16 +64,42 @@ void Node::getNeighbours()
 	// are attached to this node.
 	// This function is essentially the same as getCostToVisit
 	// but accesses a different member.
-	for (int i = 0; i < neighbours.size(); i++)
+	int n = sizeof(neighbours) / sizeof(neighbours[0]);
+
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << "My neighbour is: " << neighbours[i]->name << std::endl;
 	}
 }
 
-// Simple getter - however it is important to pay attention to formatting here.
+Node* Node::getNorth()
+{
+	return neighbours[0];
+}
+
+Node* Node::getEast()
+{
+	return neighbours[1];
+}
+
+Node* Node::getSouth()
+{
+	return neighbours[2];
+}
+
+Node* Node::getWest()
+{
+	return neighbours[3];
+}
+
 void Node::getName()
 {
-	std::cout << std::endl << "Current location: " << name << std::endl;
+	std::cout << name;
+}
+
+bool Node::getVisited()
+{
+	return visited;
 }
 
 // Destructor

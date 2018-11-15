@@ -8,4 +8,6 @@ int main()
 	Graph newGraph;
 
 	newGraph.map();
+
+	return 0;
 }
