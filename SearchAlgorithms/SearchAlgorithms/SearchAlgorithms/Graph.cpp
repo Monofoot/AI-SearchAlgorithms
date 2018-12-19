@@ -70,7 +70,6 @@ void Graph::printMap()
 	}
 }
 
-
 // Make sure we parse a node which is the starting point and a
 // node which is the end point.
 void Graph::BFS(Node* start, Node* end)
@@ -91,21 +90,23 @@ void Graph::BFS(Node* start, Node* end)
 	queue.push_back(current);
 	current->setVisited(true);
 
-	// While queue is not empty
+	// While the queue is not empty.
 	while (!queue.empty())
 	{
 		// Dequeue the current vertex and pop it.
 		current = queue.front();
 		queue.pop_front();
 
-		// for each neighbour
+		// For each adjacent neighbour:
 		for (int i = 0; i < 4; i++)
 		{
-			// If neighbour is not visited
+			// If the neighbour is not visited:
 			if (current->getNorth()->getVisited() == false)
 			{
-				// Get north and add current to the queue
+				// Get the North neighbour and push it to the
+				// back of the queue.
 				queue.push_back(current->getNorth());
+				// Set the North neighbour as visited.
 				current->getNorth()->setVisited(true);
 				std::cout << "My CURRENT location is: " << std::endl; current->getName();
 				std::cout << std::endl;
@@ -115,8 +116,10 @@ void Graph::BFS(Node* start, Node* end)
 			}
 			if (current->getEast()->getVisited() == false)
 			{
-				// Get north and add current to the queue
+				// Get the East neighbour and push it to the
+				// back of the queue.
 				queue.push_back(current->getEast());
+				// Set the East neighbour as visited.
 				current->getEast()->setVisited(true);
 				std::cout << "My CURRENT location is: " << std::endl; current->getName();
 				std::cout << std::endl;
@@ -126,8 +129,10 @@ void Graph::BFS(Node* start, Node* end)
 			}
 			if (current->getSouth()->getVisited() == false)
 			{
-				// Get north and add current to the queue
+				// Get the South neighbour and push it to the
+				// back of the queue.
 				queue.push_back(current->getSouth());
+				// Set the South neighbour as visited.
 				current->getSouth()->setVisited(true);
 				std::cout << "My CURRENT location is: " << std::endl; current->getName();
 				std::cout << std::endl;
@@ -137,8 +142,10 @@ void Graph::BFS(Node* start, Node* end)
 			}
 			if (current->getWest()->getVisited() == false)
 			{
-				// Get north and add current to the queue
+				// Get the West neighbour and push it to the
+				// back of the queue.
 				queue.push_back(current->getWest());
+				// Set the West neighbour as visited.
 				current->getWest()->setVisited(true);
 				std::cout << "My CURRENT location is: " << std::endl; current->getName();
 				std::cout << std::endl;
@@ -147,14 +154,13 @@ void Graph::BFS(Node* start, Node* end)
 				std::cout << std::endl;
 			}
 		}
+		// If the current node is the end node:
 		if (current == end)
 		{
+			// Break the loop and return.
 			return;
 		}
 	}
-
-
-
 }
 
 Graph::~Graph(){}
